@@ -50,8 +50,6 @@ const en = {
   enterAddress: "Enter a wallet address",
   minAmount: "Minimum amount is {v}",
   payAddress: "Send exactly {a} {c} to this address",
-  copied: "Copied",
-  copy: "Copy",
   awaitingPayment: "Awaiting payment",
   depositFailed: "Could not create the invoice. Please try again later.",
   payoutNote:
