@@ -49,6 +49,11 @@ const en = {
   addressSaved: "{c} address saved",
   enterAddress: "Enter a wallet address",
   minAmount: "Minimum amount is {v}",
+  payAddress: "Send exactly {a} {c} to this address",
+  copied: "Copied",
+  copy: "Copy",
+  awaitingPayment: "Awaiting payment",
+  depositFailed: "Could not create the invoice. Please try again later.",
   payoutNote:
     "Payments are processed manually, within 72 hours. Users who have topped up their balance are paid first.",
   refPercent: "of your friend's deposit",
