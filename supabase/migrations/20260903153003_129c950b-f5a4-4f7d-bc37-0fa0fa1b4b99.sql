@@ -1,0 +1,2 @@
+REVOKE ALL ON public.players, public.player_dragons, public.transactions, public.referrals, public.game_settings, public.player_achievements, public.promo_codes, public.promo_redemptions, public.news FROM anon, authenticated;
+GRANT ALL ON public.players, public.player_dragons, public.transactions, public.referrals, public.game_settings, public.player_achievements, public.promo_codes, public.promo_redemptions, public.news TO service_role;
