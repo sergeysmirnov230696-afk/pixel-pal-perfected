@@ -8,7 +8,7 @@ import { createFileRoute } from "@tanstack/react-router";
  * request can never credit a balance.
  *
  * Configure this URL in the Paykassa merchant settings:
- *   https://project--8c9e5284-5f27-44bc-91a1-6f71b4a407db.lovable.app/api/public/paykassa
+ *   https://project--5216168a-20a3-45c8-ac6a-ecebd20520e4-dev.lovable.app/api/public/paykassa
  */
 export const Route = createFileRoute("/api/public/paykassa")({
   server: {
