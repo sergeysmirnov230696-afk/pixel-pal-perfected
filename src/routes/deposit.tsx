@@ -34,10 +34,14 @@ function DepositPage() {
   const actions = useGameActions(player?.playerKey);
   const { t, lang } = useI18n();
   const [selected, setSelected] = useState<(typeof CURRENCIES)[number] | null>(null);
-  const [amount, setAmount] = useState("1.00");
+  const minDeposit = player?.settings.minDeposit ?? MIN_AMOUNT;
+  const [amount, setAmount] = useState("");
 
   const usd = Number(amount.replace(",", ".")) || 0;
   const deposits = (player?.transactions ?? []).filter((tx) => tx.kind === "deposit");
+  const pending = deposits.find(
+    (tx) => tx.status === "pending" && tx.address && (!selected || tx.method === selected.code),
+  );
 
   if (!selected) {
     return (

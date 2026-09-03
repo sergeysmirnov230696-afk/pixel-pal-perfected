@@ -49,6 +49,9 @@ const en = {
   addressSaved: "{c} address saved",
   enterAddress: "Enter a wallet address",
   minAmount: "Minimum amount is {v}",
+  payAddress: "Send exactly {a} {c} to this address",
+  awaitingPayment: "Awaiting payment",
+  depositFailed: "Could not create the invoice. Please try again later.",
   payoutNote:
     "Payments are processed manually, within 72 hours. Users who have topped up their balance are paid first.",
   refPercent: "of your friend's deposit",
@@ -166,6 +169,9 @@ const ru: Dict = {
   addressSaved: "Адрес {c} сохранён",
   enterAddress: "Введите адрес кошелька",
   minAmount: "Минимальная сумма {v}",
+  payAddress: "Отправьте ровно {a} {c} на этот адрес",
+  awaitingPayment: "Ожидаем оплату",
+  depositFailed: "Не удалось создать счёт. Попробуйте позже.",
   payoutNote:
     "Выплаты обрабатываются вручную, до 72 часов. Пользователи, пополнявшие баланс, получают выплату в первую очередь.",
   refPercent: "от суммы пополнения друга",

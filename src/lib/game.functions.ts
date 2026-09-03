@@ -483,10 +483,14 @@ export const createDeposit = createServerFn({ method: "POST" })
     if (error || !tx) throw new Error(error?.message ?? "DEPOSIT_FAILED");
 
     const { createPaykassaInvoice } = await pk();
+    const { CURRENCIES } = await import("./dragons");
+    // `amount` is in USD; Paykassa expects the amount in the coin itself.
+    const rate = CURRENCIES.find((c) => c.code === data.method)?.rate ?? 1;
+    const cryptoAmount = +(data.amount * rate).toFixed(8);
     try {
       const invoice = await createPaykassaInvoice({
         orderId: tx.id as string,
-        amount: data.amount,
+        amount: cryptoAmount,
         method: data.method,
         comment: `DragonVault ${data.playerKey}`,
       });
