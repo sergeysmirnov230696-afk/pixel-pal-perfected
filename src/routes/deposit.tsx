@@ -60,7 +60,7 @@ function DepositPage() {
               <span>
                 <span className="block font-semibold">{c.label}</span>
                 <span className="flex items-center gap-1 text-sm text-muted-foreground">
-                  {t("minimum")}: <Coin className="h-4 w-4" /> {fmt(MIN_AMOUNT, 2, lang)}
+                  {t("minimum")}: <Coin className="h-4 w-4" /> {fmt(minDeposit, 2, lang)}
                 </span>
               </span>
             </button>
@@ -105,8 +105,8 @@ function DepositPage() {
           className="btn-gold ml-auto block w-1/2 py-3"
           disabled={actions.deposit.isPending}
           onClick={() => {
-            if (usd < MIN_AMOUNT) {
-              toast.error(t("minAmount", { v: fmt(MIN_AMOUNT, 2, lang) }));
+            if (usd < minDeposit) {
+              toast.error(t("minAmount", { v: fmt(minDeposit, 2, lang) }));
               return;
             }
             actions.deposit.mutate(
@@ -116,6 +116,9 @@ function DepositPage() {
                   haptic();
                   toast.success(t("depositCreated"));
                 },
+                onError: () => {
+                  toast.error(t("depositFailed"));
+                },
               },
             );
           }}
@@ -123,6 +126,36 @@ function DepositPage() {
           {t("topUp")}
         </button>
       </section>
+
+      {pending?.address && (
+        <section className="panel space-y-3 px-4 py-5">
+          <div className="flex items-center gap-2 text-sm font-semibold text-gold">
+            <CurrencyIcon label={selected.label} color={selected.color} size={20} />
+            {t("awaitingPayment")}
+          </div>
+          <p className="text-sm text-muted-foreground">
+            {t("payAddress", {
+              a: (pending.amount * selected.rate).toFixed(6),
+              c: selected.label,
+            })}
+          </p>
+          <div className="flex items-center gap-2">
+            <code className="field flex-1 break-all text-sm">{pending.address}</code>
+            <button
+              className="btn-gold shrink-0 px-4 py-2 text-sm"
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(pending.address ?? "")
+                  .then(() => toast.success(t("copied")))
+                  .catch(() => toast.error(t("copy")));
+                haptic();
+              }}
+            >
+              {t("copy")}
+            </button>
+          </div>
+        </section>
+      )}
 
       <TxTable
         rows={deposits.map((tx) => [
